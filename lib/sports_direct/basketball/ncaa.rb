@@ -8,7 +8,7 @@ module SportsDirect
 
       def schedule
         (API.ncaa_basketball_schedule / 'competition').collect do |event|
-          normalize(event)
+          normalize_event(event)
         end
       end
 
@@ -33,7 +33,7 @@ module SportsDirect
       end
       private :team_names
 
-      def normalize(event)
+      def normalize_event(event)
         details = event.at('details')
         venue = details.at('venue')
         locality = venue.at('location/city').text
@@ -66,7 +66,7 @@ module SportsDirect
             true
           ),
           :tbd => details.at('date-tbd').text == 'true',
-          :venue_name => venue.at('name').text,
+          :venue_name => normalize_venue_name(venue.at('name').text),
           :locality => locality,
           :region => normalize_region(region.to_s),
           :country => venue.at('location/country').text,
@@ -74,7 +74,7 @@ module SportsDirect
           :away_name => away_name
         }
       end
-      private :normalize
+      private :normalize_event
 
       def normalize_performer_name(name)
         name.gsub!(/&amp;/, '&')
