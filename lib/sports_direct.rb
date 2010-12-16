@@ -1,3 +1,6 @@
+require 'active_support/core_ext/object/try'
+require 'active_support/core_ext/string/inflections'
+
 module SportsDirect
   autoload :API, 'sports_direct/api'
   autoload :Normalization, 'sports_direct/normalization'

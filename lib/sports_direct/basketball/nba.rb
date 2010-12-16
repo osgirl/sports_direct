@@ -1,16 +1,16 @@
 module SportsDirect
   module Basketball
-    class NCAA
+    class NBA
       include Normalization
 
       def schedule
-        (API.ncaa_basketball_schedule / 'competition').collect do |event|
+        (API.nba_basketball_schedule / 'competition').collect do |event|
           normalize_event(event)
         end
       end
 
       def teams
-        API.ncaa_basketball_teams('2010-2011') / 'team'
+        API.nba_basketball_teams('2010-2011') / 'team'
       end
       private :teams
 
@@ -22,10 +22,11 @@ module SportsDirect
 
       def team_names
         @team_names ||= Hash[teams.collect do |team|
-          name = normalize_performer_name(team.at('name').text)
+          name = team.at('name').text
           nick = team.at('name[@type="nick"]/text()').to_s
+          full_name = normalize_performer_name("#{name} #{nick}")
 
-          [team.at('id').text.split(':').last.to_i, "#{name} #{nick}"]
+          [team.at('id').text.split(':').last.to_i, full_name]
         end]
       end
       private :team_names
@@ -37,18 +38,15 @@ module SportsDirect
         region = venue.at('location/state').try(:text)
         home_name = team_name(event.at('home-team-content/team/id').text)
         away_name = team_name(event.at('away-team-content/team/id').text)
-        sport = "Mens #{event.at('id').text.split('/')[2].titleize}"
+        event_name = "#{home_name} vs. #{away_name}"
 
-        name = if details.at('competition-type').text == 'Regular Season'
-          "#{home_name} #{sport} vs. #{away_name} #{sport}"
-        else
-          details.at('competition-type').text
+        if details.at('competition-type').text != 'Regular Season'
+          event_name = "#{details.at('competition-type').text}: #{event_name}"
         end
 
         {
           :id => event.at('id').text.split(':').last,
-          :sport => sport,
-          :event_name => name,
+          :event_name => event_name,
           :occurs_at => normalize_date(
             event.at('start-date').text,
             event.at('timezone').text,
@@ -74,24 +72,7 @@ module SportsDirect
       private :normalize_event
 
       def normalize_performer_name(name)
-        name.gsub!(/&amp;/, '&')
-        name.gsub!(/-/, ' ')
-        name.gsub!(/\((.*)\)/, '\1')
-        name.gsub!(/\s+/, ' ')
-        name.sub!(/Col\./, 'College')
-        name.sub!(/Conn\./, 'Connecticut')
-        name.sub!(/Miami\s+Florida/, 'Miami Hurricanes')
-        name.sub!(/N\.?C\.? (Asheville|Greensboro|Wilmington)/, 'UNC \1')
-        name.sub!(/N\.C\./, 'North Carolina')
-        name.sub!(/N\.Y\./, 'NY')
-        name.sub!(/No\.Carolina/, 'North Carolina')
-        name.sub!(/St\.$/, 'State')
-        name.sub!(/Wis\./, 'Wisconsin')
-        name.sub!(/\bCC$/, 'Corpus Christi')
-        name.sub!(/\bCty\b/, 'County')
-        name.sub!(/\bSE\b/, 'Southeast')
-        name.sub!(/\bU(\.|\b|$)/, 'University')
-        name.gsub!(/[\.']/, '')
+        name = name.split.uniq.join(' ')
         name.strip!
         name.split.select { |word| word.length > 1 }.join(' ')
       end
