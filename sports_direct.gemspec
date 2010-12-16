@@ -12,4 +12,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nokogiri', '1.4.4'
   gem.add_dependency 'tzinfo', '0.3.23'
   gem.add_development_dependency 'rspec', '2.3.0'
+  gem.add_development_dependency 'vcr', '1.4.0'
+  gem.add_development_dependency 'webmock', '1.6.1'
 end
