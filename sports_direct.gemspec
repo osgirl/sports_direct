@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'sports_direct'
-  gem.version = '0.0.3'
+  gem.version = '0.0.4'
   gem.summary = 'An interface library for the Sports Direct web service.'
   gem.homepage = %q{http://github.com/tylerhunt/sports_direct}
   gem.authors = ['Tyler Hunt']
