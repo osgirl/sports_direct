@@ -33,6 +33,14 @@ module SportsDirect
         get("/basketball/NCAAB/teams/#{season}/teams_NCAAB.xml")
       end
 
+      def nhl_hockey_schedule
+        get('/hockey/NHL/schedule/schedule_NHL.xml')
+      end
+
+      def nhl_hockey_teams(season)
+        get("/hockey/NHL/teams/#{season}/teams_NHL.xml")
+      end
+
       def get(*args)
         response = super
 
@@ -49,6 +57,7 @@ module SportsDirect
       rescue Errno::ETIMEDOUT
         raise Timeout.new($!.message)
       end
+      private :get
     end
   end
 end
