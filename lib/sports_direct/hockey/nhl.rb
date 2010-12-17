@@ -73,6 +73,7 @@ module SportsDirect
 
       def normalize_performer_name(name)
         name = name.split.uniq.join(' ')
+        name.sub!(/\bNY\b/, 'New York')
         name.strip!
         name.split.select { |word| word.length > 1 }.join(' ')
       end
