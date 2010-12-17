@@ -6,4 +6,5 @@ module SportsDirect
   autoload :Normalization, 'sports_direct/normalization'
 
   autoload :Basketball, 'sports_direct/basketball'
+  autoload :Hockey, 'sports_direct/hockey'
 end
