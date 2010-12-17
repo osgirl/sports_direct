@@ -13,60 +13,60 @@ describe SportsDirect::API do
     end
   end
 
-  context ".nba_basketball_schedule" do
+  context ".basketball_nba_schedule" do
     subject do
       use_cached_requests(:basketball_nba) do
-        api.nba_basketball_schedule
+        api.basketball_nba_schedule
       end
     end
 
     it_behaves_like "an API call"
   end
 
-  context ".nba_basketball_teams" do
+  context ".basketball_nba_teams" do
     subject do
       use_cached_requests(:basketball_nba) do
-        api.nba_basketball_teams('2010-2011')
+        api.basketball_nba_teams('2010-2011')
       end
     end
 
     it_behaves_like "an API call"
   end
 
-  context ".ncaa_basketball_schedule" do
+  context ".basketball_ncaa_schedule" do
     subject do
       use_cached_requests(:basketball_ncaa) do
-        api.ncaa_basketball_schedule
+        api.basketball_ncaa_schedule
       end
     end
 
     it_behaves_like "an API call"
   end
 
-  context ".ncaa_basketball_teams" do
+  context ".basketball_ncaa_teams" do
     subject do
       use_cached_requests(:basketball_ncaa) do
-        api.ncaa_basketball_teams('2010-2011')
+        api.basketball_ncaa_teams('2010-2011')
       end
     end
 
     it_behaves_like "an API call"
   end
 
-  context ".nhl_hockey_schedule" do
+  context ".hockey_nhl_schedule" do
     subject do
       use_cached_requests(:hockey_nhl) do
-        api.nhl_hockey_schedule
+        api.hockey_nhl_schedule
       end
     end
 
     it_behaves_like "an API call"
   end
 
-  context ".nhl_hockey_teams" do
+  context ".hockey_nhl_teams" do
     subject do
       use_cached_requests(:hockey_nhl) do
-        api.nhl_hockey_teams('2010-2011')
+        api.hockey_nhl_teams('2010-2011')
       end
     end
 

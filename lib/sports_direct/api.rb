@@ -17,27 +17,27 @@ module SportsDirect
     end
 
     class << self
-      def nba_basketball_schedule
+      def basketball_nba_schedule
         get('/basketball/NBA/schedule/schedule_NBA.xml')
       end
 
-      def nba_basketball_teams(season)
+      def basketball_nba_teams(season)
         get("/basketball/NBA/teams/#{season}/teams_NBA.xml")
       end
 
-      def ncaa_basketball_schedule
+      def basketball_ncaa_schedule
         get('/basketball/NCAAB/schedule/schedule_NCAAB.xml')
       end
 
-      def ncaa_basketball_teams(season)
+      def basketball_ncaa_teams(season)
         get("/basketball/NCAAB/teams/#{season}/teams_NCAAB.xml")
       end
 
-      def nhl_hockey_schedule
+      def hockey_nhl_schedule
         get('/hockey/NHL/schedule/schedule_NHL.xml')
       end
 
-      def nhl_hockey_teams(season)
+      def hockey_nhl_teams(season)
         get("/hockey/NHL/teams/#{season}/teams_NHL.xml")
       end
 

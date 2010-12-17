@@ -4,13 +4,13 @@ module SportsDirect
       include Normalization
 
       def schedule
-        (API.nba_basketball_schedule / 'competition').collect do |event|
+        (API.basketball_nba_schedule / 'competition').collect do |event|
           normalize_event(event)
         end
       end
 
       def teams
-        API.nba_basketball_teams('2010-2011') / 'team'
+        API.basketball_nba_teams('2010-2011') / 'team'
       end
       private :teams
 
