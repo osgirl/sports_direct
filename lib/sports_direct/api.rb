@@ -17,6 +17,14 @@ module SportsDirect
     end
 
     class << self
+      def baseball_mlb_schedule
+        get('/baseball/MLB/schedule/schedule_MLB.xml')
+      end
+
+      def baseball_mlb_teams(season)
+        get("/baseball/MLB/teams/#{season}/teams_MLB.xml")
+      end
+
       def basketball_nba_schedule
         get('/basketball/NBA/schedule/schedule_NBA.xml')
       end

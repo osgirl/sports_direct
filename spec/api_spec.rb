@@ -13,6 +13,26 @@ describe SportsDirect::API do
     end
   end
 
+  context ".baseball_mlb_schedule" do
+    subject do
+      use_cached_requests(:baseball_mlb) do
+        api.baseball_mlb_schedule
+      end
+    end
+
+    it_behaves_like "an API call"
+  end
+
+  context ".baseball_mlb_teams" do
+    subject do
+      use_cached_requests(:baseball_mlb) do
+        api.baseball_mlb_teams('2011')
+      end
+    end
+
+    it_behaves_like "an API call"
+  end
+
   context ".basketball_nba_schedule" do
     subject do
       use_cached_requests(:basketball_nba) do
