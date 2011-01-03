@@ -22,6 +22,12 @@ module SportsDirect
     def normalize_date(date, zone, locality, region, utc=false)
       time_zone = {
         'America/St_Thomas' => 'Atlantic Time (Canada)',
+        'Canada/Atlantic' => 'Atlantic Time (Canada)',
+        'Canada/Central' => 'Central Time (US & Canada)',
+        'Canada/Eastern' => 'Eastern Time (US & Canada)',
+        'Canada/Mountain' => 'Mountain Time (US & Canada)',
+        'Canada/Newfoundland' => 'Newfoundland',
+        'Canada/Pacific' => 'Pacific Time (US & Canada)',
         'EST' => 'Eastern Time (US & Canada)',
         'Etc/GMT+12' => nil,
         'US/Alaska' => 'Alaska',
